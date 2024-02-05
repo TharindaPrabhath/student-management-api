@@ -48,6 +48,6 @@ model Class {
 
   students Student[]
 
-  teacher   Teacher @relation(fields: [teacherID], references: [id])
-  teacherID Int
+  teacher   Teacher @relation(fields: [teacherId], references: [id])
+  teacherId Int
 }
