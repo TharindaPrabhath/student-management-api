@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 
 dotenv.config();
@@ -10,6 +11,8 @@ const PORT = process.env.PORT;
 const db = new PrismaClient();
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -40,8 +43,8 @@ app.post("/api/students", async (req: Request, res: Response) => {
       phone: body?.phone,
       birthday: body?.birthday,
       code: body?.code,
-      teachers: { connect: { id: body?.teacherId } },
-      classes: { connect: { id: body?.classId } },
+      teachers: { connect: { id: Number(body?.teacherId) } },
+      classes: { connect: { id: Number(body?.classId) } },
     },
   });
   res.json(student);
@@ -86,7 +89,7 @@ app.post("/api/teachers", async (req: Request, res: Response) => {
       address: body?.address,
       phone: body?.phone,
       birthday: body?.birthday,
-      classes: { connect: { id: body?.classId } },
+      classes: { connect: { id: Number(body?.classId) } },
     },
   });
   res.json(teacher);
@@ -128,7 +131,7 @@ app.post("/api/classes", async (req: Request, res: Response) => {
     data: {
       name: body?.name,
       lectureHall: body?.lectureHall,
-      teacher: { connect: { id: body?.teacherId } },
+      teacher: { connect: { id: Number(body?.teacherId) } },
     },
   });
   res.json(_class);
