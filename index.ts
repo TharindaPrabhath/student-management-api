@@ -88,7 +88,7 @@ app.post("/api/teachers", async (req: Request, res: Response) => {
       address: body?.address,
       phone: body?.phone,
       birthday: body?.birthday,
-      classes: { connect: { id: Number(body?.classId) } },
+      // classes: { connect: { id: Number(body?.classId) } },
     },
   });
   res.json(teacher);
