@@ -23,7 +23,6 @@ model Student {
   birthday  String
   phone     String
   address   String
-  code      Int
 
   classes  Class[]
   teachers Teacher[]

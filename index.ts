@@ -42,7 +42,6 @@ app.post("/api/students", async (req: Request, res: Response) => {
       address: body?.address,
       phone: body?.phone,
       birthday: body?.birthday,
-      code: body?.code,
       teachers: { connect: { id: Number(body?.teacherId) } },
       classes: { connect: { id: Number(body?.classId) } },
     },
