@@ -22,7 +22,7 @@ app.get("/api/status", (req: Request, res: Response) => {
 });
 
 // Auth API
-app.get("/api/auth/login", async (req: Request, res: Response) => {
+app.post("/api/auth/login", async (req: Request, res: Response) => {
   const body = req.body;
   const user = await db.user.findFirst({
     where: {
