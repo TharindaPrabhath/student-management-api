@@ -21,6 +21,20 @@ app.get("/api/status", (req: Request, res: Response) => {
   res.send("Up & Running...");
 });
 
+// Auth API
+app.get("/api/auth/login", async (req: Request, res: Response) => {
+  const body = req.body;
+  const user = await db.user.findFirst({
+    where: {
+      email: body?.email,
+      password: body?.password,
+    },
+  });
+  if (!user) return res.status(401).json({ message: "Invalid credentials" });
+
+  res.json(user);
+});
+
 // Students API
 app.get("/api/students/:id", async (req: Request, res: Response) => {
   const id = Number(req.params.id);
